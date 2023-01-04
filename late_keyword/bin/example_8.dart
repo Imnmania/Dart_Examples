@@ -1,0 +1,18 @@
+void main(List<String> args) {
+  ///* ---------------------------------------------
+  ///* Assigning late variables to non late variable
+  ///* ---------------------------------------------
+
+  print('late fullname is being initialized');
+  late final fullName = getFullName();
+  print('after');
+  // print(fullName);
+
+  final resolvedFullName = fullName;
+  print('resolvedFullName = $resolvedFullName');
+}
+
+String getFullName() {
+  print('getFullName() is called');
+  return 'John Doe';
+}

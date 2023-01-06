@@ -2,8 +2,6 @@
 ///* Lists
 ///* -------
 
-import 'collections.dart';
-
 void main(List<String> args) {
   const names = ['Foo', 'Bar', 'Baz', 'Qux'];
 

@@ -5,6 +5,7 @@
 import 'package:collection/collection.dart';
 
 void main(List<String> args) {
+  /// declaring a set
   final names = {
     'Foo',
     'Bar',
@@ -15,6 +16,7 @@ void main(List<String> args) {
   print(names);
   print('---------------');
 
+  /// converting a list to set
   final names2 = [
     'Foo',
     'Bar',
@@ -27,6 +29,7 @@ void main(List<String> args) {
   print(uniqueNames);
   print('---------------');
 
+  /// searching in sets
   if (names.contains('Foo')) {
     print('Found Foo');
   } else {
@@ -34,6 +37,7 @@ void main(List<String> args) {
   }
   print('---------------');
 
+  /// equality in sets
   final ages1 = {10, 20, 30};
   final ages2 = {10, 20, 30};
 

@@ -3,13 +3,26 @@
 ///* ---------------------------------
 
 void main(List<String> args) {
-  int? value1 = 20;
-  int? value2 = 30;
-  final result = value1 + value2;
+  int? value1;
+  int? value2 = 1;
+  print(add(value1, value2));
+  print(add(10, 20));
 }
 
-void func(int? value1, int? value2) {
-  final result = (value1 ?? 0) + (value2 ?? 0);
+int add(int? value1, int? value2) {
+  return value1 + value2;
 }
 
-extension NullableAdd on num {}
+extension NullableAdd<T extends num> on T? {
+  T operator +(T? other) {
+    if (this != null && other == null) {
+      return this as T;
+    } else if (this == null && other != null) {
+      return other;
+    } else if (this == null && other == null) {
+      return 0 as T;
+    } else {
+      return this + other as T;
+    }
+  }
+}

@@ -1,0 +1,2 @@
+Stream.asyncExpand takes a stream
+Stream.asyncMap takes a future

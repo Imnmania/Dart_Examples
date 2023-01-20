@@ -1,0 +1,56 @@
+import 'dart:async';
+
+///* --------------
+///* Stream Timeout
+///* --------------
+
+void main(List<String> args) {
+  //
+}
+
+class TimeoutBetweenEvents<E> extends StreamTransformerBase<E, E> {
+  final Duration duration;
+
+  const TimeoutBetweenEvents({
+    required this.duration,
+  });
+
+  @override
+  Stream<E> bind(Stream<E> stream) {
+    StreamController<E>? controller;
+    StreamSubscription<E>? subscription;
+    Timer? timer;
+
+    controller = StreamController(
+      onListen: () {
+        subscription = stream.listen(
+          (data) {
+            timer?.cancel();
+            timer = Timer.periodic(
+              duration,
+              (timer) {
+                controller?.addError(
+                  TimeoutBetweenEventsException('Timeout!!!'),
+                );
+              },
+            );
+            controller?.add(data);
+          },
+          onError: controller?.addError,
+          onDone: controller?.close,
+        );
+      },
+      onCancel: () {
+        subscription?.cancel();
+        timer?.cancel();
+      },
+    );
+
+    return controller.stream;
+  }
+}
+
+class TimeoutBetweenEventsException implements Exception {
+  final String message;
+  TimeoutBetweenEventsException(this.message);
+}

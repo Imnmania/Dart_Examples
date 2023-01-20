@@ -1,11 +1,33 @@
-import 'dart:async';
-
 ///* --------------
 ///* Stream Timeout
 ///* --------------
 
-void main(List<String> args) {
-  //
+import 'dart:async';
+
+void main(List<String> args) async {
+  try {
+    await for (final name
+        in getNames().withTimeoutBetweenEvents(const Duration(seconds: 3))) {
+      print(name);
+    }
+  } on TimeoutBetweenEventsException catch (ex, st) {
+    print('TimeoutBetweenEventsException: ${ex.message}');
+    print('Stack Trace: $st');
+  }
+}
+
+Stream<String> getNames() async* {
+  yield 'John';
+  await Future.delayed(const Duration(seconds: 1));
+  yield 'Jane';
+  await Future.delayed(const Duration(seconds: 5));
+  yield 'Joe';
+}
+
+extension WithTimeoutBetweenEvents<T> on Stream<T> {
+  Stream<T> withTimeoutBetweenEvents(Duration duration) {
+    return transform(TimeoutBetweenEvents(duration: duration));
+  }
 }
 
 class TimeoutBetweenEvents<E> extends StreamTransformerBase<E, E> {

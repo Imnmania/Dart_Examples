@@ -1,8 +1,8 @@
-///* ------------------
+///* ------------------------------------
 ///* Stream.asyncExpand
 ///? create a stream with another stream
 ///? similar to .then() in future
-///* ------------------
+///* ------------------------------------
 
 void main(List<String> args) async {
   final result = getNames().asyncExpand((name) => getCharacters(name));

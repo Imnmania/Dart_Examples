@@ -1,6 +1,6 @@
 ///* ------------------
 ///* Stream.asyncExpand
-///? create a stream with stream
+///? create a stream with another stream
 ///? similar to .then() in future
 ///* ------------------
 
